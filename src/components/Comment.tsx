@@ -2,14 +2,17 @@ import { usePost } from "~/contexts/PostContext";
 import CommentList from "./CommentList";
 import { PostByIdComment } from "~/server/api/routers/post";
 import IconBtn from "./IconBtn";
-import { FaHeart, FaReply, FaTrash } from "react-icons/fa/";
+import { FaReply, FaTrash } from "react-icons/fa/";
+import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import { api } from "~/utils/api";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
+import { useSession } from "next-auth/react";
 
 function Comment({ comment }: { comment: PostByIdComment }) {
   const [responsing, setResponsing] = useState(false);
+  const session = useSession();
 
   const ctx = usePost();
   const router = useRouter();
@@ -20,6 +23,24 @@ function Comment({ comment }: { comment: PostByIdComment }) {
   const deleteComment = api.comment.delete.useMutation({
     onSuccess: () => {
       router.reload();
+    },
+  });
+
+  const likeComment = api.comment.toggleLike.useMutation({
+    onSuccess: (data) => {
+      if (data.addedLike) {
+        comment._count.likes++;
+        comment.likes.push({
+          userId: session.data!.user.id,
+          commentId: comment.id,
+        });
+      } else {
+        comment._count.likes--;
+
+        comment.likes = comment.likes.filter(
+          (c) => c.userId !== session.data!.user.id
+        );
+      }
     },
   });
 
@@ -34,8 +55,12 @@ function Comment({ comment }: { comment: PostByIdComment }) {
         </header>
         <p className="p-4">{comment.message}</p>
         <footer className="flex gap-4 text-sm">
-          <IconBtn Icon={FaHeart} aria-label="Like">
-            2
+          <IconBtn
+            Icon={comment.likes.length > 0 ? VscHeartFilled : VscHeart}
+            aria-label="Like"
+            handleClick={() => likeComment.mutate({ id: comment.id })}
+          >
+            {comment._count.likes}
           </IconBtn>
 
           <IconBtn

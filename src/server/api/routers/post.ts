@@ -13,6 +13,8 @@ export const postRouter = createTRPCRouter({
       })
     )
     .query(({ ctx, input: { id } }) => {
+      const currentUserId = ctx.session?.user.id || "";
+
       return ctx.prisma.post.findUnique({
         where: { id },
         select: {
@@ -27,6 +29,11 @@ export const postRouter = createTRPCRouter({
               parentId: true,
               createdAt: true,
               user: { select: { id: true, name: true } },
+              _count: { select: { likes: true } },
+              likes:
+                currentUserId == null
+                  ? false
+                  : { where: { userId: currentUserId } },
             },
           },
         },
