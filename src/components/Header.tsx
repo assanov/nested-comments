@@ -8,14 +8,14 @@ function Header() {
       {session?.data?.user ? (
         <button
           className="bg-red-400 px-4 py-2 text-white"
-          onClick={() => signOut().finally()}
+          onClick={() => signOut()}
         >
           Logout
         </button>
       ) : (
         <button
           className="bg-red-400 px-4 py-2 text-white"
-          onClick={() => signIn().finally()}
+          onClick={() => signIn()}
         >
           Login
         </button>

@@ -77,7 +77,7 @@ function Comment({ comment }: { comment: PostByIdComment }) {
         </footer>
       </div>
       {responsing && (
-        <CommentForm postId={ctx!.post!.id} parentId={comment.id} />
+        <CommentForm postId={ctx.post!.id} parentId={comment.id} />
       )}
       {childComments?.length > 0 ? (
         <CommentList

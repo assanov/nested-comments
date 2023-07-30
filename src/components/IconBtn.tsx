@@ -6,7 +6,7 @@ function IconBtn({
 
   colorClasses = " text-blue-500",
   children,
-  handleClick = () => {},
+  handleClick,
 }: {
   Icon: IconType;
 
@@ -17,7 +17,7 @@ function IconBtn({
   return (
     <button
       className={`flex items-center ${colorClasses}`}
-      onClick={() => handleClick()}
+      onClick={handleClick}
     >
       <span className={children !== null ? "mr-1" : ""}>
         <Icon />
