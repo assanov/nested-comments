@@ -13,7 +13,7 @@ function Comment({ comment }: { comment: PostByIdComment }) {
 
   return (
     <div className="ml-2 mt-2">
-      <div className={`rounded border border-gray-400 p-3`}>
+      <div className={`rounded border border-gray-200 p-3 `}>
         <header className="flex justify-between">
           <span className="text-sm text-blue-500">{comment.user.name}</span>
           <span className="text-sm text-blue-500">

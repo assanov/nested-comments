@@ -35,5 +35,6 @@ export const postRouter = createTRPCRouter({
 });
 
 export type RouterOutput = inferRouterOutputs<typeof postRouter>;
+export type AllPostsRes = RouterOutput["getAll"];
 export type PostById = RouterOutput["getById"];
 export type PostByIdComment = NonNullable<PostById>["comments"][0];

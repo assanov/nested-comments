@@ -6,7 +6,7 @@ function CommentList({
   className,
 }: {
   comments: PostByIdComment[];
-  className: string;
+  className?: string;
 }) {
   return (
     <div className={className}>

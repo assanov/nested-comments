@@ -10,15 +10,21 @@ function Post() {
 
   return (
     <>
-      <div className="p-3">
-        <h1 className="text-xl text-red-800">{post.title}</h1>
-        <article>{post.body}</article>
+      <div className="border border-gray-200 p-6 shadow ">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          {post.title}
+        </h5>
+        <p className="font-normal text-gray-700 dark:text-gray-400">
+          {post.body}
+        </p>
       </div>
-      {rootComments.length ? (
-        <CommentList comments={rootComments} className="" />
-      ) : (
-        "No comments yet"
-      )}
+      <div className="md:w-full lg:w-1/2">
+        {rootComments.length ? (
+          <CommentList comments={rootComments} />
+        ) : (
+          "No comments yet"
+        )}
+      </div>
     </>
   );
 }
