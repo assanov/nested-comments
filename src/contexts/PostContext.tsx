@@ -31,23 +31,25 @@ function PostProvider({ children }: { children: ReactElement }) {
     }
     const group: NestedCommentsI = {};
     data.comments.forEach((comment) => {
-      const parentId = comment.parentId || "root";
+      const parentId = comment.parentId ?? "root";
 
-      //@ts-ignore
-      group[parentId] ||= [];
+      if (!group[parentId]) {
+        group[parentId] = [];
+      }
+
       group[parentId]!.push(comment);
     });
     return group;
   }, [data?.comments]);
 
   function getReplies(parentId: string): PostByIdComment[] {
-    return commentsByParentId[parentId] || [];
+    return commentsByParentId[parentId] ?? [];
   }
 
   return (
     <Context.Provider
       value={{
-        post: data || null,
+        post: data ?? null,
         getReplies,
         rootComments: getReplies("root"),
       }}
