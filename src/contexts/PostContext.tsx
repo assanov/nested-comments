@@ -4,10 +4,6 @@ import LoadingSpinner from "~/components/LoadingSpinner";
 import { PostById, PostByIdComment } from "~/server/api/routers/post";
 import { api } from "~/utils/api";
 
-export interface NestedCommentsI {
-  [key: string]: PostByIdComment[];
-}
-
 interface PostContextI {
   post: PostById;
   getReplies: (id: string) => PostByIdComment[];
@@ -29,7 +25,7 @@ function PostProvider({ children }: { children: ReactElement }) {
     if (data?.comments == null) {
       return {};
     }
-    const group: NestedCommentsI = {};
+    const group: Record<string, PostByIdComment[]> = {};
     data.comments.forEach((comment) => {
       const parentId = comment.parentId ?? "root";
 

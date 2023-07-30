@@ -6,7 +6,7 @@ import { FaEdit, FaHeart, FaReply, FaTrash } from "react-icons/fa/";
 
 function Comment({ comment }: { comment: PostByIdComment }) {
   const ctx = usePost();
-  if (ctx == null ?? ctx?.getReplies == null) {
+  if (ctx == null || ctx.getReplies == null) {
     return;
   }
   const childComments = ctx.getReplies(comment.id);
