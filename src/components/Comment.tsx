@@ -36,12 +36,12 @@ function Comment({ comment }: { comment: PostByIdComment }) {
           />
         </footer>
       </div>
-      {childComments?.length > 0 && (
+      {childComments?.length > 0 ? (
         <CommentList
           comments={childComments}
           className="border-l-2 border-gray-300"
         />
-      )}
+      ) : null}
     </div>
   );
 }

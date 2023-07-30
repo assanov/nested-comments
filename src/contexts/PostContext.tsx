@@ -33,6 +33,7 @@ function PostProvider({ children }: { children: ReactElement }) {
     data.comments.forEach((comment) => {
       const parentId = comment.parentId || "root";
 
+      //@ts-ignore
       group[parentId] ||= [];
       group[parentId]!.push(comment);
     });

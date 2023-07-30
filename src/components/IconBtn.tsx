@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { IconType } from "react-icons";
 
 function IconBtn({
   Icon,
@@ -6,7 +7,7 @@ function IconBtn({
   colorClasses = " text-blue-500",
   children,
 }: {
-  Icon: any;
+  Icon: IconType;
   isActive: boolean;
   colorClasses?: string;
   children?: ReactNode;
