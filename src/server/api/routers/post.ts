@@ -13,7 +13,7 @@ export const postRouter = createTRPCRouter({
       })
     )
     .query(({ ctx, input: { id } }) => {
-      const currentUserId = ctx.session?.user.id || "";
+      const currentUserId = ctx.session?.user.id ?? "";
 
       return ctx.prisma.post.findUnique({
         where: { id },
