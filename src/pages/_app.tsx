@@ -10,7 +10,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <div className="container m-4 mx-auto">
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   );
 };
